@@ -26,6 +26,20 @@ Now you're ready to use the TVT AI Chat Streamlit project! Enjoy chatting with t
 
 ## Configure a new assistant
 
-1. Go to settings and modify parameters (prompt, names, temperature, titles, etc)
+1. Go to settings and modify parameters in `settings.yaml`
+   
+   1. **UI**
+      - password
+      - pagetitle
+      - sidebar
+        - title
+        - option1
+        - option2
+        - option3
+      - greeting
+      - placeholder
+      - bot_name
+      - person_name
+      - instructions 
 
 2. Go to `./chat_icons` and change images keeping the names.

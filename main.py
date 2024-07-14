@@ -11,7 +11,7 @@ with open("settings.yaml", "r") as file:
     settings = yaml.safe_load(file)
 
 # Set page title and favicon
-st.set_page_config(page_title=settings["pagetitle"], page_icon="./chat_icons/favicon.png")
+st.set_page_config(page_title=settings["pagetitle"], page_icon="./icons/favicon.png")
 st.write(css, unsafe_allow_html=True)
 
 # Configuring the OpenAI API client
@@ -40,11 +40,11 @@ if not st.session_state["password_correct"]:
 
 # Set UI
 with st.sidebar:
-    st.image("./chat_icons/brandlogo.png", width=50)
+    st.image("./icons/brandlogo.png", width=50)
     st.sidebar.title(settings["sidebar"]["title"])
-    st.sidebar.button(settings["sidebar"]["boton1"])
-    st.sidebar.button(settings["sidebar"]["boton2"])
-    st.sidebar.button(settings["sidebar"]["boton3"])
+    st.sidebar.button(settings["sidebar"]["option1"])
+    st.sidebar.button(settings["sidebar"]["option2"])
+    st.sidebar.button(settings["sidebar"]["option3"])
 
 def stream_data(text):
     for word in text.split(" "):
@@ -53,7 +53,7 @@ def stream_data(text):
 
 # Extract settings for chat
 instructions = settings["instructions"]
-saludo = settings["saludo"]
+greeting = settings["greeting"]
 placeholder = settings["placeholder"]
 bot_name = settings["bot_name"]
 person_name = settings["person_name"]
@@ -71,26 +71,26 @@ if "greeting_displayed" not in st.session_state:
     st.session_state["greeting_displayed"] = False
 
 if not st.session_state["greeting_displayed"]:
-    assistant_message_container = st.chat_message("assistant", avatar="./chat_icons/assistant_image.png")
+    assistant_message_container = st.chat_message("assistant", avatar="./icons/assistant_image.png")
     message_placeholder = assistant_message_container.empty()
 
     partial_response = ""
-    for chunk in stream_data(saludo):
+    for chunk in stream_data(greeting):
         partial_response += chunk
         message_placeholder.markdown(f"**{bot_name}:** {partial_response}")
     
-    st.session_state['messages'].append({"role": "assistant", "content": f"**{bot_name}:** {saludo}"})
+    st.session_state['messages'].append({"role": "assistant", "content": f"**{bot_name}:** {greeting}"})
     st.session_state["greeting_displayed"] = True
 else:
     # Display chat messages from history
     for message in st.session_state.messages:
-        with st.chat_message(message["role"], avatar=f"./chat_icons/{str(message['role'])}_image.png"):
+        with st.chat_message(message["role"], avatar=f"./icons/{str(message['role'])}_image.png"):
             st.markdown(message["content"])
 
 # React to user input
 if prompt := st.chat_input(placeholder=placeholder, max_chars=150):
     # Display user message in chat message container
-    with st.chat_message("user", avatar="./chat_icons/user_image.png"):
+    with st.chat_message("user", avatar="./icons/user_image.png"):
         st.markdown(f"**{person_name}:** {prompt}")
     # Add user message to chat history
     st.session_state.messages.append({"role": "user", "content": f"**{person_name}:** {prompt}"})
@@ -114,7 +114,7 @@ if prompt := st.chat_input(placeholder=placeholder, max_chars=150):
     full_response = response.choices[0].message.content.strip()
     
     # Display assistant message in chat message container
-    assistant_message_container = st.chat_message("assistant", avatar="./chat_icons/assistant_image.png")
+    assistant_message_container = st.chat_message("assistant", avatar="./icons/assistant_image.png")
     message_placeholder = assistant_message_container.empty()
 
     partial_response = ""

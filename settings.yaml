@@ -3,15 +3,15 @@ password: "tvt2024"
 pagetitle: "Procafecol Mesa de Ayuda"
 sidebar:
   title: "Procafecol Asistente Virtual"
-  boton1: "Llamar a un agente humano"
-  boton2: "Chatear con un agente humano"
-  boton3: "Crear un ticket de soporte"
+  option1: "Llamar a un agente humano"
+  option2: "Chatear con un agente humano"
+  option3: "Crear un ticket de soporte"
 
 # IA Parameters
 temperature: 0.7
 
 # Chat
-saludo: "Hola soy Eugenio, ¿en qué te puedo ayudarte hoy?"
+greeting: "Hola soy Eugenio, ¿en qué te puedo ayudarte hoy?"
 placeholder: "Escribe tu mensaje aquí y presiona enter para enviar."
 bot_name: "Eugenio"
 person_name: "James Rodriguez"
