@@ -1,0 +1,14 @@
+# Python
+*.pyc
+__pycache__/
+venv/
+chat_venv/
+*.egg-info/
+dist/
+build/
+*.log
+.env
+
+
+# Streamlit
+.streamlit/
