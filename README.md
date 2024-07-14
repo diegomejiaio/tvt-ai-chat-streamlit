@@ -29,6 +29,7 @@ Now you're ready to use the TVT AI Chat Streamlit project! Enjoy chatting with t
 1. Go to settings and modify parameters in `settings.yaml`
    
    1. **UI**
+      - disablePassword -> (change it to false before publish)
       - password
       - pagetitle
       - sidebar

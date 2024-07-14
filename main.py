@@ -5,6 +5,13 @@ import os
 from dotenv import load_dotenv
 import time
 import yaml
+import requests
+
+
+# Mock response function
+def get_mock_response():
+    # This is a simple example. You can customize the mock response as needed.
+    return greeting
 
 # Load settings from the YAML file
 with open("settings.yaml", "r") as file:
@@ -13,10 +20,6 @@ with open("settings.yaml", "r") as file:
 # Set page title and favicon
 st.set_page_config(page_title=settings["pagetitle"], page_icon="./icons/favicon.png")
 st.write(css, unsafe_allow_html=True)
-
-# Configuring the OpenAI API client
-load_dotenv()
-client = OpenAI(api_key=os.getenv("OPEN_API_KEY"))
 
 # Password verification
 if "password_correct" not in st.session_state:
@@ -33,7 +36,7 @@ def check_password():
         if st.session_state["password_attempts"] >= 2:
             st.stop()
 
-if not st.session_state["password_correct"]:
+if not st.session_state["password_correct"] and not settings["disablePassword"]:
     st.title("Autenticación requerida")
     st.text_input("Introduce la contraseña", type="password", on_change=check_password, key="password")
     st.stop()
@@ -47,9 +50,13 @@ with st.sidebar:
     st.sidebar.button(settings["sidebar"]["option3"])
 
 def stream_data(text):
-    for word in text.split(" "):
-        yield word + " "
-        time.sleep(0.12)
+    for char in text:
+        yield char
+        time.sleep(0.015)
+
+# Configuring the OpenAI API client
+load_dotenv()
+client = OpenAI(api_key=os.getenv("OPEN_API_KEY"))
 
 # Extract settings for chat
 instructions = settings["instructions"]
@@ -60,7 +67,7 @@ person_name = settings["person_name"]
 
 # Initialize OpenAI model
 if "openai_model" not in st.session_state:
-    st.session_state["openai_model"] = "gpt-3.5-turbo"
+    st.session_state["openai_model"] = "gpt-4-turbo"
 
 # Initialize chat history
 if "messages" not in st.session_state:
@@ -109,7 +116,6 @@ if prompt := st.chat_input(placeholder=placeholder, max_chars=150):
         max_tokens=150,
         stop=None
     )
-    
     # Extract the text from the response
     full_response = response.choices[0].message.content.strip()
     

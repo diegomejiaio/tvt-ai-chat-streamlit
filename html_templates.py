@@ -4,12 +4,14 @@ css ="""
 
         .st-emotion-cache-janbn0 {
             background-color: #2b313e;
+            padding: 1rem 1rem 1rem 1rem
         }
 
         /* AI Chat Message */
     
         .st-emotion-cache-4oy321 {
             background-color: #475063;
+            padding: 1rem 1rem 1rem 1rem
         }
 
         section[data-testid="stSidebar"] {
