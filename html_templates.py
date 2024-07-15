@@ -1,5 +1,10 @@
 css ="""
     <style>
+
+        body {
+            font-family: "Poppins", sans-serif
+        }
+
         /* User Chat Message */
 
         .st-emotion-cache-janbn0 {
@@ -35,6 +40,7 @@ css ="""
         .st-emotion-cache-1eo1tir {
             padding: 3rem 1rem 1rem;
         }
+
 
     </style>
     """

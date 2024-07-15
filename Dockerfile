@@ -6,7 +6,7 @@ COPY requirements.txt requirements.txt
 COPY main.py main.py
 COPY html_templates.py html_templates.py
 COPY .env .env
-COPY chat_icons chat_icons
+COPY icons icons
 
 RUN pip install -r requirements.txt
 

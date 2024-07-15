@@ -5,13 +5,6 @@ import os
 from dotenv import load_dotenv
 import time
 import yaml
-import requests
-
-
-# Mock response function
-def get_mock_response():
-    # This is a simple example. You can customize the mock response as needed.
-    return greeting
 
 # Load settings from the YAML file
 with open("settings.yaml", "r") as file:
@@ -27,6 +20,7 @@ if "password_correct" not in st.session_state:
 if "password_attempts" not in st.session_state:
     st.session_state["password_attempts"] = 0
 
+# Funtion to validate password
 def check_password():
     if st.session_state["password"] == settings["password"]:
         st.session_state["password_correct"] = True
@@ -36,6 +30,7 @@ def check_password():
         if st.session_state["password_attempts"] >= 2:
             st.stop()
 
+# Start verifying password, this avoid non allowed request to our APIs
 if not st.session_state["password_correct"] and not settings["disablePassword"]:
     st.title("Autenticación requerida")
     st.text_input("Introduce la contraseña", type="password", on_change=check_password, key="password")
@@ -49,6 +44,7 @@ with st.sidebar:
     st.sidebar.button(settings["sidebar"]["option2"])
     st.sidebar.button(settings["sidebar"]["option3"])
 
+# Funtion to stream text
 def stream_data(text):
     for char in text:
         yield char
@@ -64,6 +60,8 @@ greeting = settings["greeting"]
 placeholder = settings["placeholder"]
 bot_name = settings["bot_name"]
 person_name = settings["person_name"]
+max_tokens = settings["max_tokens"]
+temperature = settings["temperature"]
 
 # Initialize OpenAI model
 if "openai_model" not in st.session_state:
@@ -112,8 +110,8 @@ if prompt := st.chat_input(placeholder=placeholder, max_chars=150):
     response = client.chat.completions.create(
         model=st.session_state["openai_model"],
         messages=messages,
-        temperature=settings["temperature"],
-        max_tokens=150,
+        temperature=temperature,
+        max_tokens=max_tokens,
         stop=None
     )
     # Extract the text from the response
