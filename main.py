@@ -1,48 +1,31 @@
 import streamlit as st
-from openai import OpenAI
+from config import load_settings, load_api_key
+from authentication import authenticate
+from ui import setup_ui
 from html_templates import css
+import streamlit as st
+from openai import OpenAI
 import os
 from dotenv import load_dotenv
 import time
 import yaml
 
+# Load settings and API key
 # Load settings from the YAML file
 with open("settings.yaml", "r") as file:
     settings = yaml.safe_load(file)
 
-# Set page title and favicon
+api_key = load_api_key()
+
+# Set page configuration
 st.set_page_config(page_title=settings["pagetitle"], page_icon="./icons/favicon.png")
 st.write(css, unsafe_allow_html=True)
 
 # Password verification
-if "password_correct" not in st.session_state:
-    st.session_state["password_correct"] = False
-if "password_attempts" not in st.session_state:
-    st.session_state["password_attempts"] = 0
-
-# Funtion to validate password
-def check_password():
-    if st.session_state["password"] == settings["password"]:
-        st.session_state["password_correct"] = True
-    else:
-        st.session_state["password_attempts"] += 1
-        st.error("Contraseña incorrecta")
-        if st.session_state["password_attempts"] >= 2:
-            st.stop()
-
-# Start verifying password, this avoid non allowed request to our APIs
-if not st.session_state["password_correct"] and not settings["disablePassword"]:
-    st.title("Autenticación requerida")
-    st.text_input("Introduce la contraseña", type="password", on_change=check_password, key="password")
-    st.stop()
+authenticate(settings)
 
 # Set UI
-with st.sidebar:
-    st.image("./icons/brandlogo.png", width=50)
-    st.sidebar.title(settings["sidebar"]["title"])
-    st.sidebar.button(settings["sidebar"]["option1"])
-    st.sidebar.button(settings["sidebar"]["option2"])
-    st.sidebar.button(settings["sidebar"]["option3"])
+setup_ui(settings)
 
 # Funtion to stream text
 def stream_data(text):
@@ -70,7 +53,6 @@ if "openai_model" not in st.session_state:
 # Initialize chat history
 if "messages" not in st.session_state:
     st.session_state['messages'] = []
-
 # Display initial greeting in streaming
 if "greeting_displayed" not in st.session_state:
     st.session_state["greeting_displayed"] = False
@@ -84,13 +66,18 @@ if not st.session_state["greeting_displayed"]:
         partial_response += chunk
         message_placeholder.markdown(f"**{bot_name}:** {partial_response}")
     
-    st.session_state['messages'].append({"role": "assistant", "content": f"**{bot_name}:** {greeting}"})
+    st.session_state['messages'].append({"role": "assistant", "content": greeting})
     st.session_state["greeting_displayed"] = True
 else:
     # Display chat messages from history
     for message in st.session_state.messages:
-        with st.chat_message(message["role"], avatar=f"./icons/{str(message['role'])}_image.png"):
-            st.markdown(message["content"])
+        role = message["role"]
+        content = message["content"]
+        with st.chat_message(role, avatar=f"./icons/{role}_image.png"):
+            if role == "assistant":
+                st.markdown(f"**{bot_name}:** {content}")
+            else:
+                st.markdown(f"**{person_name}:** {content}")
 
 # React to user input
 if prompt := st.chat_input(placeholder=placeholder, max_chars=150):
@@ -98,13 +85,15 @@ if prompt := st.chat_input(placeholder=placeholder, max_chars=150):
     with st.chat_message("user", avatar="./icons/user_image.png"):
         st.markdown(f"**{person_name}:** {prompt}")
     # Add user message to chat history
-    st.session_state.messages.append({"role": "user", "content": f"**{person_name}:** {prompt}"})
+    st.session_state.messages.append({"role": "user", "content": prompt})
+    
     # Prepare the chat history for the API call
     messages = [
-        {"role": message["role"], "content": message["content"].replace(f"**{person_name}:** ", "")}
+        {"role": "system", "content": instructions}
+    ] + [
+        {"role": message["role"], "content": message["content"]}
         for message in st.session_state.messages
     ]
-    messages.insert(0, {"role": "system", "content": instructions})
     
     # Generate a response using OpenAI's API
     response = client.chat.completions.create(
@@ -127,4 +116,4 @@ if prompt := st.chat_input(placeholder=placeholder, max_chars=150):
         message_placeholder.markdown(f"**{bot_name}:** {partial_response}")
 
     # Add assistant message to chat history
-    st.session_state.messages.append({"role": "assistant", "content": f"**{bot_name}:** {full_response}"})
+    st.session_state.messages.append({"role": "assistant", "content": full_response})
