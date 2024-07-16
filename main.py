@@ -1,5 +1,4 @@
 import streamlit as st
-from config import load_settings, load_api_key
 from authentication import authenticate
 from ui import setup_ui
 from html_templates import css
@@ -15,7 +14,7 @@ import yaml
 with open("settings.yaml", "r", encoding='utf-8') as file:
     settings = yaml.safe_load(file)
 
-api_key = load_api_key()
+api_key = os.getenv("OPEN_API_KEY")
 
 # Set page configuration
 st.set_page_config(page_title=settings["pagetitle"], page_icon="./icons/favicon.png")

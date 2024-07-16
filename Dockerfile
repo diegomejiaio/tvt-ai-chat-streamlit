@@ -7,9 +7,11 @@ COPY main.py main.py
 COPY html_templates.py html_templates.py
 COPY .env .env
 COPY icons icons
+COPY ui.py ui.py
+COPY autentication.py autentication.py
 
 RUN pip install -r requirements.txt
 
-EXPOSE 8501
+EXPOSE 8080
 
-CMD streamlit run main.py
+ENTRYPOINT [ "streamlit","run","main.py","--server.port","8080", "--server.enableCORS", "false", "--server.address=0.0.0.0" ]
