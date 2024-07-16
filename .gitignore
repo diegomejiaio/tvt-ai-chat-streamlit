@@ -8,7 +8,8 @@ dist/
 build/
 *.log
 .env
-
+.mypy_cache/
+.DS_Store
 
 # Streamlit
 .streamlit/

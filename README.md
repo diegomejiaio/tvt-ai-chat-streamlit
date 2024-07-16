@@ -3,6 +3,8 @@
 ## Overview
 Welcome to the TVT AI Chat Streamlit project! This project aims to provide a basic chatbot using OpenAI API keys.
 
+![Arquitectura](./architecture.png)
+
 ## Deploy localy
 To get started, follow these simple steps:
 
