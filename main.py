@@ -12,7 +12,7 @@ import yaml
 
 # Load settings and API key
 # Load settings from the YAML file
-with open("settings.yaml", "r") as file:
+with open("settings.yaml", "r", encoding='utf-8') as file:
     settings = yaml.safe_load(file)
 
 api_key = load_api_key()
