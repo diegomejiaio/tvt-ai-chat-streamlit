@@ -9,7 +9,8 @@ build/
 *.log
 .env
 .mypy_cache/
-.DS_Store
+*.DS_Store*
+secrets.env
 
 # Streamlit
 .streamlit/

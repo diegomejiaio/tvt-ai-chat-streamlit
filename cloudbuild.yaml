@@ -1,0 +1,11 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [
+      'build',
+      '--tag', '${_GCP_REGION}-docker.pkg.dev/${_GCP_PROJECT}/${_AR_REPO}/${_SERVICE_NAME}',
+      '--build-arg', 'OPENAI_API_KEY=${_OPENAI_API_KEY}',
+      '.'
+    ]
+
+images:
+  - '${_GCP_REGION}-docker.pkg.dev/${_GCP_PROJECT}/${_AR_REPO}/${_SERVICE_NAME}'

@@ -6,17 +6,41 @@ css ="""
         }
 
         /* User Chat Message */
-
         .st-emotion-cache-janbn0 {
-            background-color: #2b313e;
-            padding: 1rem 1rem 1rem 1rem
+            padding: 1rem 1rem 1rem 1rem;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .st-emotion-cache-janbn0 {
+                background-color: #2b313e;
+                color: white;
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .st-emotion-cache-janbn0 {
+                background-color: #f0f0f0;
+                color: black;
+            }
         }
 
         /* AI Chat Message */
-    
         .st-emotion-cache-4oy321 {
-            background-color: #475063;
-            padding: 1rem 1rem 1rem 1rem
+            padding: 1rem 1rem 1rem 1rem;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .st-emotion-cache-4oy321 {
+                background-color: #475063;
+                color: white;
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            .st-emotion-cache-4oy321 {
+                background-color: #e0e0e0;
+                color: black;
+            }
         }
 
         section[data-testid="stSidebar"] {

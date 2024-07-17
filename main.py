@@ -14,7 +14,9 @@ import yaml
 with open("settings.yaml", "r", encoding='utf-8') as file:
     settings = yaml.safe_load(file)
 
-api_key = os.getenv("OPEN_API_KEY")
+# Load the OpenAI API key from the environment variables from .secrets
+load_dotenv()
+api_key = os.getenv("OPENAI_API_KEY")
 
 # Set page configuration
 st.set_page_config(page_title=settings["pagetitle"], page_icon="./icons/favicon.png")
@@ -33,8 +35,7 @@ def stream_data(text):
         time.sleep(0.015)
 
 # Configuring the OpenAI API client
-load_dotenv()
-client = OpenAI(api_key=os.getenv("OPEN_API_KEY"))
+client = OpenAI(api_key=api_key)
 
 # Extract settings for chat
 instructions = settings["instructions"]
