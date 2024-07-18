@@ -3,7 +3,7 @@ import time
 
 def setup_ui(settings):
     with st.sidebar:
-        st.image("./icons/brandlogo.png", width=50)
+        st.image("./icons/brandlogo.png", width=250)
         st.sidebar.title(settings["sidebar"]["title"])
         st.sidebar.button(settings["sidebar"]["option1"])
         st.sidebar.button(settings["sidebar"]["option2"])

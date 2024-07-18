@@ -65,6 +65,10 @@ css ="""
             padding: 3rem 1rem 1rem;
         }
 
-
+        .st-emotion-cache-1kyxreq.e115fcil2 {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
     """
