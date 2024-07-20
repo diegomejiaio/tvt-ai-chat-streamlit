@@ -1,6 +1,6 @@
 import streamlit as st
 from authentication import authenticate
-from ui import setup_ui
+from ui import setup_ui, stream_data
 from html_templates import css
 import os
 from dotenv import load_dotenv
@@ -38,11 +38,7 @@ authenticate(settings)
 # Configurar la UI
 setup_ui(settings)
 
-# Función para stream de texto
-def stream_data(text):
-    for char in text:
-        yield char
-        time.sleep(0.015)
+
 
 # Seleccionar el cliente de API basado en el proveedor
 provider = st.session_state.get("provider", settings.get("provider", "openai"))
