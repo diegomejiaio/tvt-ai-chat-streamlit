@@ -1,0 +1,6 @@
+OPENAI_API_KEY=sk-XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX # OpenAI API Key
+GCP_PROJECT="MY_GCP_PROJECT" # GCP Project ID
+GCP_REGION="us-central1" # GCP Region
+AR_REPO="ai-repo" # Artifact Registry Repository
+SERVICE_NAME="ai-chat" # Service Name
+GCP_SA_KEY_PATH="../.gcp/keys/service-account-key.json" # Service Account Key Path Local
