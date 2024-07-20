@@ -1,5 +1,6 @@
 import streamlit as st
 import time
+import yaml
 
 def setup_ui(settings):
     with st.sidebar:
@@ -8,6 +9,13 @@ def setup_ui(settings):
         st.sidebar.button(settings["sidebar"]["option1"])
         st.sidebar.button(settings["sidebar"]["option2"])
         st.sidebar.button(settings["sidebar"]["option3"])
+        st.sidebar.markdown("---")  # Separador
+        provider = st.sidebar.selectbox(
+            "Seleccione el proveedor de IA",
+            ("openai", "gemini"),
+            index=["openai", "gemini"].index(settings.get("provider", "openai"))
+        )
+        st.session_state["provider"] = provider
 
 def stream_data(text):
     for char in text:
@@ -32,3 +40,18 @@ def display_chat_history(settings):
         with st.chat_message(message["role"], avatar=f"./icons/{str(message['role'])}_image.png"):
             st.markdown(message["content"])
 
+def show_settings_page(settings):
+    st.title("Configuraciones")
+
+    # Editable settings
+    instructions = st.text_area("Instructions", value=settings.get("instructions", ""))
+    temperature = st.slider("Temperature", min_value=0.0, max_value=1.0, value=settings.get("temperature", 0.7), step=0.01)
+    provider = st.selectbox("Provider", options=["openai", "gemini"], index=["openai", "gemini"].index(settings.get("provider", "openai")))
+
+    if st.button("Guardar Configuraciones"):
+        settings["instructions"] = instructions
+        settings["temperature"] = temperature
+        settings["provider"] = provider
+        with open("settings.yaml", "w", encoding='utf-8') as file:
+            yaml.dump(settings, file, allow_unicode=True)
+        st.success("Configuraciones guardadas con éxito.")

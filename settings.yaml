@@ -1,5 +1,5 @@
 # UI
-disablePassword: false
+disablePassword: true
 password: "tvt2024"
 pagetitle: "Procafecol Mesa de Ayuda"
 sidebar:
@@ -11,6 +11,7 @@ sidebar:
 # IA Parameters
 temperature: 0.7
 max_tokens: 150
+provider: "openai" # "openai" or "gemini"
 
 # Chat
 greeting: "Hola soy Eugenio, ¿en qué puedo ayudarte hoy 🤓 ☕️?"

@@ -3,3 +3,4 @@ transformers==4.38.1
 greenlet
 openai
 python-dotenv
+vertexai
