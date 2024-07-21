@@ -12,12 +12,6 @@ sidebar:
 temperature: 0.7
 max_tokens: 150
 provider: "openai" # "openai" or "gemini"
-
-# Chat
-greeting: "Hola soy Eugenio, ¿en qué puedo ayudarte hoy 🤓 ☕️?"
-placeholder: "Escribe tu mensaje aquí y presiona enter para enviar."
-bot_name: "Eugenio"
-person_name: "James Rodriguez"
 instructions: |
   Tu nombre es Eugenio.
   Agrega emojis al menos 1 y maximo 2 por mensaje.
@@ -38,3 +32,10 @@ instructions: |
   Una vez que te responda, indicas que los datos son correctos y le pides que vuelva a verificar.
   Para verificar los datos, repitele al usuario sus datos y preguntale si son correctos.
   Una vez te responda que si, procede a confirmarle que ya debe poder acceder.
+
+# Chat
+greeting: "Hola soy Eugenio, ¿en qué puedo ayudarte hoy 🤓 ☕️?"
+placeholder: "Escribe tu mensaje aquí y presiona enter para enviar."
+bot_name: "Eugenio"
+person_name: "James Rodriguez"
+

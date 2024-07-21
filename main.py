@@ -16,9 +16,6 @@ load_dotenv()
 # Establecer la variable de entorno para las credenciales de Google
 os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.getenv("GCP_SA_KEY_PATH")
 
-# Verificar que la variable de entorno se haya configurado correctamente
-print("GOOGLE_APPLICATION_CREDENTIALS:", os.getenv("GOOGLE_APPLICATION_CREDENTIALS"))
-
 # Cargar las configuraciones desde el archivo YAML
 with open("settings.yaml", "r", encoding='utf-8') as file:
     settings = yaml.safe_load(file)

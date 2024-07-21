@@ -36,10 +36,34 @@ Now you're ready to use the TVT AI Chat Streamlit project! Enjoy chatting with t
         - option1
         - option2
         - option3
+   2. **IA Parameters**
+      - temperature
+      - max_tokens
+      - provider
+      - instructions
+   3. **Chat**
       - greeting
       - placeholder
       - bot_name
       - person_name
-      - instructions 
 
 2. Go to `./chat_icons` and change images keeping the names.
+
+3. Use `deploy.sh` to run in GCP Cloud Run Service
+
+4. Use `destroy.sh` to eliminate resources in GCP.
+
+
+## Coming soon
+- Configuring initial prompt
+- AWS deployment
+
+
+## Credits
+- [Streamlit](https://streamlit.io/)
+- [OpenAI](https://openai.com/)
+- [Google Cloud Platform](https://cloud.google.com/)
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+```
