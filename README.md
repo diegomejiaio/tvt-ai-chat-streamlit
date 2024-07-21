@@ -1,7 +1,7 @@
 # White Brand Chatbot Assistant
 
 ## Overview
-Welcome to the TVT AI Chat Streamlit project! This project aims to provide a basic chatbot using OpenAI API keys.
+Welcome to the TVT AI Chat Streamlit project! This project aims to provide a basic chatbot using OpenAI or Gemini.
 
 ![Arquitectura](./architecture.png)
 
