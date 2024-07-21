@@ -66,4 +66,3 @@ Now you're ready to use the TVT AI Chat Streamlit project! Enjoy chatting with t
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-```
