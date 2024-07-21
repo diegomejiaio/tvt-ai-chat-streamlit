@@ -65,4 +65,4 @@ Now you're ready to use the TVT AI Chat Streamlit project! Enjoy chatting with t
 - [Google Cloud Platform](https://cloud.google.com/)
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License.
