@@ -16,6 +16,9 @@ COPY ui.py ui.py
 COPY authentication.py authentication.py
 COPY settings.yaml settings.yaml
 
+RUN python -m venv /app/venv
+ENV PATH="/app/venv/bin:$PATH"
+RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 EXPOSE 8080

@@ -9,12 +9,22 @@ import yaml
 from openai import OpenAI
 from vertexai import init
 from vertexai.generative_models import GenerationConfig, GenerativeModel, HarmBlockThreshold, HarmCategory
+import socket
 
 # Cargar las variables de entorno desde el archivo .env
 load_dotenv()
 
-# Establecer la variable de entorno para las credenciales de Google
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.getenv("GCP_SA_KEY_PATH")
+hostname = socket.gethostname()
+# Si el hostname contiene 'local', asumimos que estamos en un entorno de desarrollo
+if 'local' in hostname:
+    gcp_sa_key_path = os.getenv("GCP_SA_KEY_PATH")
+    if gcp_sa_key_path and os.path.exists(gcp_sa_key_path):
+        os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = gcp_sa_key_path
+    else:
+        print("Warning: GCP_SA_KEY_PATH no está definido o el archivo no existe.")
+else:
+    print("Entorno de producción detectado. No se configurará GOOGLE_APPLICATION_CREDENTIALS.")
+
 
 # Cargar las configuraciones desde el archivo YAML
 with open("settings.yaml", "r", encoding='utf-8') as file:

@@ -1,5 +1,5 @@
 # UI
-disablePassword: true
+disablePassword: false
 password: "tvt2024"
 pagetitle: "Procafecol Mesa de Ayuda"
 sidebar:

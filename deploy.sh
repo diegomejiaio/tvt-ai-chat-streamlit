@@ -23,11 +23,11 @@ gcloud run deploy "$SERVICE_NAME" \
     --region="$GCP_REGION" \
     --platform=managed \
     --project="$GCP_PROJECT" \
-    --set-env-vars=GCP_PROJECT="$GCP_PROJECT",GCP_REGION="$GCP_REGION",AR_REPO="$AR_REPO",SERVICE_NAME="$SERVICE_NAME" \
+    --set-env-vars=GCP_PROJECT="$GCP_PROJECT",GCP_REGION="$GCP_REGION",AR_REPO="$AR_REPO",SERVICE_NAME="$SERVICE_NAME",OPENAI_API_KEY="$OPENAI_API_KEY",GCP_SA_KEY_PATH="$GCP_SA_KEY_PATH" \
     --max-instances=1 \
-    --concurrency=10 \
-    --cpu=1 \
-    --memory=256Mi \
+    --concurrency=20 \
+    --cpu=2 \
+    --memory=1Gi \
     --timeout=300s
 
 # Configurar política IAM para permitir a todos los usuarios invocar el servicio de Cloud Run
