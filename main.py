@@ -76,6 +76,7 @@ if "model" not in st.session_state:
 # Inicializar el historial del chat
 if "messages" not in st.session_state:
     st.session_state['messages'] = []
+
 # Mostrar el saludo inicial en streaming
 if "greeting_displayed" not in st.session_state:
     st.session_state["greeting_displayed"] = False
@@ -96,10 +97,7 @@ else:
         role = message["role"]
         content = message["content"]
         with st.chat_message(role, avatar=f"./icons/{role}_image.png"):
-            if role == "assistant":
-                st.markdown(f"**{bot_name}:** {content}")
-            else:
-                st.markdown(f"**{person_name}:** {content}")
+            st.markdown(f"**{bot_name if role == 'assistant' else person_name}:** {content}")
 
 # Reaccionar al input del usuario
 if prompt := st.chat_input(placeholder=placeholder, max_chars=150):
@@ -109,10 +107,7 @@ if prompt := st.chat_input(placeholder=placeholder, max_chars=150):
 
     messages = [
         {"role": "system", "content": instructions}
-    ] + [
-        {"role": message["role"], "content": message["content"]}
-        for message in st.session_state.messages
-    ]
+    ] + st.session_state.messages
 
     if provider == "openai":
         response = client.chat.completions.create(
