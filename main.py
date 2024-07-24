@@ -76,7 +76,6 @@ if "model" not in st.session_state:
 # Inicializar el historial del chat
 if "messages" not in st.session_state:
     st.session_state['messages'] = []
-
 # Mostrar el saludo inicial en streaming
 if "greeting_displayed" not in st.session_state:
     st.session_state["greeting_displayed"] = False
