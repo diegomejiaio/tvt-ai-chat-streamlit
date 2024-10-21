@@ -45,8 +45,6 @@ authenticate(settings)
 # Configurar la UI
 setup_ui(settings)
 
-
-
 # Seleccionar el cliente de API basado en el proveedor
 provider = st.session_state.get("provider", settings.get("provider", "openai"))
 client = None
@@ -71,7 +69,7 @@ temperature = settings["temperature"]
 
 # Inicializar el modelo
 if "model" not in st.session_state:
-    st.session_state["model"] = "gpt-4-turbo" if provider == "openai" else "gemini-1.5-pro-001"
+    if provider == "openai": st.session_state["model"] = "gpt-4-turbo"
 
 # Inicializar el historial del chat
 if "messages" not in st.session_state:

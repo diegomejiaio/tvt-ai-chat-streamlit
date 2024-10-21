@@ -9,10 +9,14 @@ def setup_ui(settings):
         st.sidebar.button(settings["sidebar"]["option2"])
         st.sidebar.button(settings["sidebar"]["option3"])
         st.sidebar.markdown("---")  # Separador
+        def update_provider():
+            st.session_state["provider"] = st.session_state.provider_selectbox
         provider = st.sidebar.selectbox(
             "Seleccione el proveedor de IA",
             ("openai", "gemini"),
-            index=["openai", "gemini"].index(settings.get("provider", "openai"))
+            index=["openai", "gemini"].index(settings.get("provider", "gemini")),
+            key="provider_selectbox",
+            on_change=update_provider
         )
         st.session_state["provider"] = provider
 
