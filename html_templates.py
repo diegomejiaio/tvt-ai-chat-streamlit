@@ -5,6 +5,10 @@ css ="""
             font-family: "Poppins", sans-serif
         }
 
+        .st-emotion-cache-79elbk .eczjsme17 {
+            display: none;
+        }
+
         /* User Chat Message */
         .st-emotion-cache-janbn0 {
             padding: 1rem 1rem 1rem 1rem;
